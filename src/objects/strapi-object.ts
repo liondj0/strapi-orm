@@ -1,4 +1,4 @@
-import { parseFieldsFromRawData } from "../util/fieldUtil";
+import { parseFieldsFromRawData } from "../util/field-util";
 
 export abstract class StrapiObject {
     abstract getInstance(): typeof StrapiObject;

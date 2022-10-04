@@ -1,6 +1,6 @@
 import { RawEntityRelation } from "../types/raw-entity-relation";
 import { StrapiObject } from "../objects/strapi-object";
-import { objectUtil } from "./objectUtil";
+import { objectUtil } from "./object-util";
 import { FieldType } from "../enums/field-type";
 import { Field } from "../fields/field";
 import { CONSTANTS } from "./constants";

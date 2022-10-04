@@ -1,4 +1,4 @@
-import {parseFieldsFromRawData} from "../../src/util/fieldUtil";
+import {parseFieldsFromRawData} from "../../src/util/field-util";
 import {Home} from "../mocs/entities/home";
 import {homeRawData} from "../mocs/data/home";
 import {Meta} from "../mocs/entities/components/meta";
