@@ -4,7 +4,7 @@ import {parseFieldsFromRawData} from "../util/fieldUtil";
 
 export abstract class Component extends StrapiObject {
 
-    parseComponentFromRawData(data: Partial<Component>): Component | Component[] {
-        return parseFieldsFromRawData(this, data)
+    parseComponentFromRawData<T extends Component>(data: Partial<T>): T | T[] {
+        return parseFieldsFromRawData<T>(this as unknown as T, data)
     }
 }

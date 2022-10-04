@@ -16,8 +16,8 @@ export class Home extends Entity{
     @field(FieldType.COMPONENT, {builder: () => new Meta()})
     headers!: Meta[];
 
-    @field(FieldType.RELATION, {builder: () => new Image()})
-    image!: Image;
+    @field(FieldType.RELATION, {builder: () => new Image(), mapper: (image) => `${image.src}`})
+    image!: string;
 
     @field()
     text!: string;

@@ -6,22 +6,22 @@ import {objectUtil} from "./objectUtil";
 import {FieldType} from "../enums/field-type";
 import {Field} from "../fields/field";
 import {CONSTANTS} from "./constants";
-import {Meta} from "../../__tests__/mocs/entities/components/meta";
-import {Home} from "../../__tests__/mocs/entities/home";
 
 
 export const getFields = <T extends StrapiObject>(target: any): Field<T>[] => {
     return Reflect.getMetadata(CONSTANTS.FIELDS_KEY, target);
 }
 
-const parseComponentCallback = <T extends Component>(builder: () => T, data: Partial<T>) => {
+const parseComponentCallback = <T extends Component>(builder: () => T, data: Partial<T>, mapper?: (data: T) => any) => {
     const object = builder();
-    return object.parseComponentFromRawData.bind(object)(data);
+    const callback = object.parseComponentFromRawData.bind(object);
+    return mapper ? mapper(callback(data) as T) : callback(data);
 }
 
-const parseComponentFieldFromRawData = <T extends Component>(field: Field<T>, data: any | any[]): Component | Component[] => {
-    if(Array.isArray(data)) return data.map(data => parseComponentCallback(field.options!.builder!, data)) as T[];
-    return parseComponentCallback(field.options!.builder!, data);
+const parseComponentFieldFromRawData = <T extends Component>(field: Field<T>, data: any | any[]) => {
+    const callback = (data: T) => parseComponentCallback(field.options!.builder!, data, field.options?.mapper);
+    if(Array.isArray(data)) return data.map(callback) as T[];
+    return callback(data);
 }
 
 const parseEntityCallback = <T extends Entity>(builder: () => T, data: Partial<T>) => {
@@ -29,10 +29,12 @@ const parseEntityCallback = <T extends Entity>(builder: () => T, data: Partial<T
     return object.parseEntity.bind(object)(data);
 }
 
-const parseRelationFieldFromRawData = <T extends Entity>(field: Field<T>, relation: RawEntityRelation<any>): Entity | Entity[] => {
+const parseRelationFieldFromRawData = <T extends Entity>(field: Field<T>, relation: RawEntityRelation<any>) => {
     const data = relation.data;
-    if(Array.isArray(data)) return data.map(i => parseEntityCallback(field.options!.builder!, {id: i.id, ...i.attributes})) as Entity[];
-    return parseEntityCallback(field.options!.builder!, data.attributes);
+    const arrayCallback = (data: any) => parseEntityCallback(field.options!.builder!, {id: data.id, ...data.attributes});
+    const mappedCallback = (callback: (data: any) => any) => field.options?.mapper ? field.options.mapper(callback(data)) : callback(data);
+    if(Array.isArray(data)) return data.map(i => mappedCallback(arrayCallback)) as Entity[];
+    return mappedCallback(() => parseEntityCallback(field.options!.builder!, data.attributes));
 }
 
 export const parseFieldsFromRawData = <T extends StrapiObject>(target: T, data: Partial<T>): T | T[] => {
