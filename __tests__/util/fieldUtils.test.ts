@@ -1,11 +1,7 @@
-
-
-// @ts-ignore
 import {parseFieldsFromRawData} from "../../src/util/fieldUtil";
 import {Home} from "../mocs/entities/home";
 import {homeRawData} from "../mocs/data/home";
 import {Meta} from "../mocs/entities/components/meta";
-import {Image} from "../mocs/entities/components/image";
 
 describe("fieldUtil", () => {
     describe("parseFieldsFromRawData", () => {

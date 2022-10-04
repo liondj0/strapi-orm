@@ -1,10 +1,10 @@
 import {Meta} from "./components/meta";
 import {field} from "../../../src/fields/field";
 import {FieldType} from "../../../src/enums/field-type";
-import {Entity} from "../../../src/objects/entity";
 import {Image} from "./components/image";
+import {StrapiObject} from "../../../src/objects/strapi-object";
 
-export class Home extends Entity{
+export class Home extends StrapiObject{
 
     constructor() {
         super()

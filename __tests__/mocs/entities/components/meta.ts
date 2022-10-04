@@ -1,9 +1,9 @@
 import {Image} from "./image";
-import {Component} from "../../../../src/objects/component";
 import {field} from "../../../../src/fields/field";
 import {FieldType} from "../../../../src/enums/field-type";
+import {StrapiObject} from "../../../../src/objects/strapi-object";
 
-export class Meta extends Component{
+export class Meta extends StrapiObject{
     constructor() {
         super();
     }
