@@ -1,6 +1,3 @@
-
-
-//@ts-ignore
 import {getFlatRelationsForObject} from "../../src/util/relationUtil";
 import {Home} from "../mocs/entities/home";
 
