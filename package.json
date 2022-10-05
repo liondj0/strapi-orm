@@ -1,6 +1,6 @@
 {
   "name": "strapi-orm",
-  "version": "1.0.1",
+  "version": "1.0.2v2",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -35,7 +35,7 @@
     "type": "git",
     "url": "git+https://github.com/liondj0/strapi-orm.git"
   },
-  "keywords": [],
+  "keywords": ["Strapi", "ORM", "Mapping"],
   "bugs": {
     "url": "https://github.com/liondj0/strapi-orm/issues"
   },
