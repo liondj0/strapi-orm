@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "jest --config jestconfig.json",
+    "test": "jest --config jest.config.json",
     "prettier": "prettier --check \"./src/**/*.{ts,json}\"",
     "prettier:fix": "prettier --write \"./src/**/*.{ts,json}\"",
     "build": "tsc",
