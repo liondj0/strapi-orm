@@ -5,9 +5,11 @@ Strapi ORM is a package that makes creating requests and mapping responses from 
 
 # Usage
 
+
+
 ## Fields
 
-Mark fields that you created in you strapi cms, and they will be mapped from response to your object. ``FieldType.COMPONENT`` and ``FieldType.RELATION`` are relations that will be mapped accordingly. Components in strapi are mapped as plain objects, while relations are wrapped in `relations: {data: {id: number, attributes: RelationData}}`. This will be mapped to classes/objects that you defined.
+Mark fields that you created in you strapi cms, and they will be mapped from response to your object. ``FieldType.COMPONENT`` and ``FieldType.RELATION`` are relations that will be mapped from strapi's response type to their respective definitions. Components in strapi are mapped as plain objects, while relations are wrapped in `relations: {data: {id: number, attributes: RelationData}}`. This will be mapped to classes/objects that you defined.
 
 ```
 import {field, FieldType, StrapiObject} from "strapi-orm";
@@ -54,7 +56,7 @@ class Image extends StrapiObject {
 
 class ObjectWithImage extends StrapiObject {
 
-    @field(FieldType.COMPONENT, {builder: () => new Image})
+    @field(FieldType.RELATION, {builder: () => new Image})
     image: Image;
 
 }
@@ -63,11 +65,13 @@ class ObjectWithImage extends StrapiObject {
  ```
  class ObjectWithImage extends StrapiObject {
 
-    @field(FieldType.COMPONENT, {builder: () => new Image, mapper: image => image.src})
+    @field(FieldType.RELATION, {builder: () => new Image, mapper: image => image.src})
     image: string;
 
 }
  ```
+
+
 
 ## Relations
 
@@ -99,4 +103,4 @@ const relations = getFlatRelationsForObject(getFlatRelationsForObject);
 // relations -> ['relation', 'relation.bar', 'image']
 ```
 
-### Note that relations will be named according to the name of the properties on class!
+### Note that relations will be named according to the property names and should match strapi names
