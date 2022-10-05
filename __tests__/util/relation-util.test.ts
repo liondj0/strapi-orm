@@ -1,4 +1,6 @@
 import {getFlatRelationsForObject} from "../../src/util/relationUtil";
+// TODO: Resolve issues with tests
+//@ts-ignore
 import {Home} from "../mocs/entities/home";
 
 describe("relationUtil",  () => {

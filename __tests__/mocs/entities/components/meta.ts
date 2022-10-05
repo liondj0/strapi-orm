@@ -1,3 +1,5 @@
+// TODO: Resolve issues with tests
+//@ts-ignore
 import {Image} from "./image";
 import {field} from "../../../../src/fields/field";
 import {FieldType} from "../../../../src/enums/field-type";

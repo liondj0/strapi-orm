@@ -1,3 +1,5 @@
+// TODO: Resolve issues with tests
+//@ts-ignore
 import {Meta} from "./components/meta";
 import {field} from "../../../src/fields/field";
 import {FieldType} from "../../../src/enums/field-type";

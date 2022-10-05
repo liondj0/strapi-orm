@@ -1,7 +1,12 @@
 import {parseFieldsFromRawData} from "../../src/util/field-util";
+// TODO: Resolve issues with tests
+//@ts-ignore
 import {Home} from "../mocs/entities/home";
+// TODO: Resolve issues with tests
+//@ts-ignore
 import {homeRawData} from "../mocs/data/home";
 import {Meta} from "../mocs/entities/components/meta";
+import {field, FieldType} from "../../src";
 
 describe("fieldUtil", () => {
     describe("parseFieldsFromRawData", () => {
@@ -23,6 +28,20 @@ describe("fieldUtil", () => {
         it("should map fields with mapper provided", () => {
             const homeData = parseFieldsFromRawData(new Home(), homeRawData as any) as Home;
             expect(homeData.image).toBe(homeRawData.image.data.attributes.src)
+        })
+        it("should map unavailable data to undefined", () => {
+            class HomeExtended extends Home {
+                @field(FieldType.COMPONENT, {nullable: true, builder: () => new Meta()})
+                optMeta?: Meta
+
+                getInstance() {
+                    return HomeExtended;
+                }
+            }
+            const homeData = parseFieldsFromRawData(new HomeExtended(), homeRawData as any) as HomeExtended;
+            expect(homeData.meta).toBeDefined()
+            expect(homeData.image).toBeDefined()
+            expect(homeData.optMeta).toBeUndefined()
         })
     })
 })
