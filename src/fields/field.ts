@@ -10,7 +10,6 @@ export type Field<T> = { key: keyof T; type: FieldType; options?: FieldOptions<T
 export const field = <T>(type = FieldType.STRING, options?: FieldOptions<T>) => {
     return (target: any, propertyKey: string): void => {
         if ([FieldType.COMPONENT, FieldType.RELATION].includes(type) && !options?.builder) {
-            console.log(`Builder not provided for field: ${String(propertyKey)} on target: ${JSON.stringify({ target }, null, 3)}`);
             throw new Error(`Builder not provided`);
         }
         const fields: Field<T>[] = Reflect.getMetadata(CONSTANTS.FIELDS_KEY, target.constructor) ?? [];
