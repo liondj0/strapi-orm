@@ -1,5 +1,9 @@
 import {parseFieldsFromRawData} from "../../src/util/field-util";
+// TODO: Resolve issues with tests
+//@ts-ignore
 import {Home} from "../mocs/entities/home";
+// TODO: Resolve issues with tests
+//@ts-ignore
 import {homeRawData} from "../mocs/data/home";
 import {Meta} from "../mocs/entities/components/meta";
 

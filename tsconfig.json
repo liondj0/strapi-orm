@@ -22,6 +22,6 @@
     "skipLibCheck": true,
     "target": "es6"
   },
-  "exclude": ["./node_modules", "./lib", "./.vscode", "./.idea", "./.ebextensions", "./.github", "./temp-upload", "./__tests__"],
+  "exclude": ["./node_modules", "./lib", "./.vscode", "./.idea", "./.ebextensions", "./.github", "./temp-upload", "./__tests__/*"],
   "include": ["./src/**/*.ts"]
 }
