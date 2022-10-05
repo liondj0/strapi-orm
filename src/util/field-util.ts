@@ -21,7 +21,7 @@ const parseCallback = <T extends StrapiObject>(builder: () => T, data: Partial<T
 };
 
 const parseRelationData = <T extends StrapiObject>(field: Field<T>, data: Partial<T> | Partial<T>[]) => {
-    const callback = (data: any) => parseCallback(field.options!.builder!, data, field.options?.mapper);
+    const callback = (callbackData: any) => parseCallback(field.options!.builder!, callbackData, field.options?.mapper);
     if (Array.isArray(data)) return data.map(callback);
     return callback(data);
 };

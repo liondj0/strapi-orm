@@ -1,21 +1,27 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "declaration": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "module": "CommonJS",
+    "experimentalDecorators": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "lib": ["es2016", "dom", "es2017", "esnext.asynciterable"],
+    "module": "commonjs",
     "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "./lib",
+    "paths": {
+      "*": ["./node_modules/*", "./src/types/*"]
+    },
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true
+    "rootDir": "src",
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "es6"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules", "./lib", "./.vscode", "./.idea", "./.ebextensions", "./.github", "./temp-upload", "./__tests__"],
+  "include": ["./src/**/*.ts"]
 }

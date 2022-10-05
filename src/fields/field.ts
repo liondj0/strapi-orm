@@ -7,7 +7,7 @@ export type FieldOptions<T> = {
     mapper?: (data: T) => any;
 };
 export type Field<T> = { key: keyof T; type: FieldType; options?: FieldOptions<T> };
-export const field = <T extends Object>(type = FieldType.STRING, options?: FieldOptions<T>) => {
+export const field = <T>(type = FieldType.STRING, options?: FieldOptions<T>) => {
     return (target: any, propertyKey: string): void => {
         if ([FieldType.COMPONENT, FieldType.RELATION].includes(type) && !options?.builder) {
             console.log(`Builder not provided for field: ${String(propertyKey)} on target: ${JSON.stringify({ target }, null, 3)}`);
