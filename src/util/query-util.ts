@@ -5,23 +5,26 @@ type WhereQueryItem = { value: string | string[]; operator: WhereOperator; field
 type SortQueryItem = { field: string; value: "ASC" | "DESC" };
 export type Query = { where?: WhereQueryItem | WhereQueryItem[]; sort?: SortQueryItem | SortQueryItem[]; relations?: string[] };
 
+const parseFieldString = (field: string) => field.split(".").reduce((str, curr) => `${str}[${curr}]`, "");
+
 export const mapQueryItemsToString = (queryType: string, items: QueryItem[]): string[][] => {
     const queryParts: string[][] = [];
     items.map(({ value, field }) => {
-        if (typeof value === "string") return queryParts.push([`${queryType}${field}`, value]);
-        value.forEach((val, index) => queryParts.push([`${queryType}${field}[${index}]`, val]));
+        if (typeof value === "string") return queryParts.push([`${queryType}${parseFieldString(field)}`, value]);
+        value.forEach((val, index) => queryParts.push([`${queryType}${parseFieldString(field)}[${index}]`, val]));
     });
     return queryParts;
 };
 
 export const createWhereQuery = (where: WhereQueryItem | WhereQueryItem[]): string[][] => {
     const filters = Array.isArray(where) ? where : [where];
-    const mappedFilters: QueryItem[] = filters.map(({ field, operator, value }) => ({ field: `${field}[${operator}]`, value }));
+    const mappedFilters: QueryItem[] = filters.map(({ field, operator, value }) => ({ field: `${field}.${operator}`, value }));
     return mapQueryItemsToString("filters", mappedFilters);
 };
 
 export const createSortQuery = (sort: SortQueryItem | SortQueryItem[]): string[][] => {
-    return mapQueryItemsToString("sort", Array.isArray(sort) ? sort : [sort]);
+    const sortItems = Array.isArray(sort) ? sort : [sort];
+    return mapQueryItemsToString("sort", sortItems);
 };
 
 export const createQuery = (query: Query): string[][] => {
