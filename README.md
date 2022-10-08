@@ -57,7 +57,7 @@ class Image extends StrapiObject {
 
 class ObjectWithImage extends StrapiObject {
 
-    @field(FieldType.RELATION, {builder: () => new Image})
+    @field(FieldType.RELATION, {builder: () => new Image()})
     image: Image;
 
 }
@@ -66,7 +66,7 @@ class ObjectWithImage extends StrapiObject {
  ```
  class ObjectWithImage extends StrapiObject {
 
-    @field(FieldType.RELATION, {builder: () => new Image, mapper: image => image.src})
+    @field(FieldType.RELATION, {builder: () => new Image(), mapper: image => image.src})
     image: string;
 
 }
