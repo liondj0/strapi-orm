@@ -23,7 +23,7 @@ const parseCallback = <T extends StrapiObject>(builder: () => T, data: Partial<T
 const parseRelationData = <T extends StrapiObject>(field: Field<T>, data: Partial<T> | Partial<T>[]) => {
     const callback = (callbackData: any) => parseCallback(field.options!.builder!, callbackData, field.options?.mapper);
     if (!field.options?.nullable && !data) throw new Error(`Data missing for field: ${String(field.key)} of type: ${field.type}`);
-    if (field.options?.nullable && (!(data as any)?.data)) return undefined;
+    if (field.options?.nullable && !(data as any)?.data) return undefined;
     if (Array.isArray(data)) return data.map(callback);
     return callback(data);
 };
