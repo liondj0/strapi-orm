@@ -11,7 +11,7 @@ export const getFields = <T extends StrapiObject>(target: any): Field<T>[] => {
 
 const mapRelationDataToStrapiObject = <T extends StrapiObject>(data: RawEntityRelation<T>) => {
     if (Array.isArray(data.data)) return data.data.map(d => ({ id: d.id, ...d.attributes }));
-    return data.data?.attributes;
+    return data?.data?.attributes;
 };
 
 const parseCallback = <T extends StrapiObject>(builder: () => T, data: Partial<T>, mapper?: (data: T) => any) => {
