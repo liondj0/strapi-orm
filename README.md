@@ -1,4 +1,4 @@
-# Strapi ORM v1.2.6
+# Strapi ORM v1.2.7
 
 Strapi ORM is a package that makes creating requests and mapping responses from strapi cms easy. 
 
