@@ -3,7 +3,7 @@ import { WhereOperator } from "../enums/where-operator";
 type QueryItem = { field: string; value: string | string[] };
 type WhereQueryItem = { value: string | string[]; operator: WhereOperator; field: string };
 type SortQueryItem = { field: string; value: "ASC" | "DESC" };
-export type Query = { where?: WhereQueryItem | WhereQueryItem[]; sort?: SortQueryItem | SortQueryItem[]; relations?: string[] };
+export type Query = { where?: WhereQueryItem | WhereQueryItem[]; sort?: SortQueryItem | SortQueryItem[]; relations?: string[]; locale?: string };
 
 const parseFieldString = (field: string) => field.split(".").reduce((str, curr) => `${str}[${curr}]`, "");
 
@@ -32,5 +32,6 @@ export const createQuery = (query: Query): string[][] => {
     if (query.relations) queryParams.push(...query.relations.map(r => [`populate`, r]));
     if (query.where) queryParams.push(...createWhereQuery(query.where));
     if (query.sort) queryParams.push(...createSortQuery(query.sort));
+    if (query.locale) queryParams.push([`locale`, query.locale]);
     return queryParams;
 };
