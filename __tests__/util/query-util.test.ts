@@ -1,5 +1,6 @@
 import {createWhereQuery, mapQueryItemsToString} from "../../src/util/query-util";
 import {WhereOperator} from "../../src/enums/where-operator";
+import {createQuery} from "../../lib/util/query-util";
 
 describe("queryUtil", () => {
     describe("mapQueryItemsToString", () => {
@@ -41,6 +42,14 @@ describe("queryUtil", () => {
             expect(result[0][1]).toBe('1234');
             expect(result[1][0]).toBe('filters[id][$in][1]');
             expect(result[1][1]).toBe('4321');
+        })
+    })
+
+    describe("createQuery", () => {
+        it("should add locale to query", () => {
+            const result = createQuery({locale: 'en'});
+            expect(result[0][0]).toBe('locale');
+            expect(result[0][1]).toBe('en');
         })
     })
 })
